@@ -1,0 +1,41 @@
+<h2 class="text-center">Wasted food</h2>
+<div class="d-flex">
+    <button type="button" class="btn btn-dark w-100" >
+        <%= link_to "Add", new_ingredient_path, class: "link_button"%>
+    </button>
+</div>
+<div class="mt-2 md-2"></div>
+<div class="row text-center">
+    <div class="col-6 ">
+        <button type="button" class="btn btn-dark w-100" >
+            <%= link_to "Previous month", { :controller => :ingredients, :action => :wasted_ingredients, offset: @offset - 1  }, { class: "link_button" }%>
+        </button>
+    </div>
+    <div class="col-6 ">
+        <button type="button" class="btn btn-dark w-100" >
+            <%= link_to "Next month", { :controller => :ingredients, :action => :wasted_ingredients, offset: @offset + 1  }, { class: "link_button" }%>
+        </button>
+    </div>
+</div>
+<h3 class="text-center">Wasted food for <%= @month_and_year %></h3>
+<% @wasted_ingredients.each do |ingredient| %>
+    <div class="text-left">
+        <div class="d-flex justify-content-center card-body bg-light rounded mb-1 mt-1">
+            <div class="col-6">
+                <h5 class="text-center">
+                    <%= ingredient.name  %>
+                </h5>
+            </div>
+            <div class="col-3">
+                <h5 class="text-center">
+                    <%= ingredient.weight %>KG
+                </h5>
+            </div>
+            <div class="col-3">
+                <h5 class="text-center">
+                    <%= ingredient.price %>USD
+                </h5>
+            </div>
+        </div>
+    </div>
+<% end %>

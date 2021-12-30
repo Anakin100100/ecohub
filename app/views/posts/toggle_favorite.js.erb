@@ -1,0 +1,9 @@
+var postId = '<%= @post.id%>'
+console.log(postId)
+function toggleLikeButton(postId, innerHTML) {
+  let likeButton = document.querySelector(`.like-icon[data-id='${postId}']`)
+  console.log(likeButton)
+  likeButton.classList.toggle('red');
+}
+toggleLikeButton(postId);
+console.log("toggle");

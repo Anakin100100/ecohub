@@ -1,0 +1,89 @@
+<% @posts.reverse.each do |post| %>
+  <%= content_tag :div, id: dom_id(post), class: ["card", "card-body", "mb-2", dom_class(post)] do %>
+    <div class="container">
+      <div class="row">
+        <div class="col-9">
+          <p class="card-title h-5">
+            <%= User.find(post.user_id).username %>
+          </p>
+          <p class="card-subtitle mb-2 text-muted h-6"><%= post.created_at %></p>
+        </div>
+        <div class="col-3">
+          <%= link_to toggle_favorite_post_path(post), remote: true, method: :post do %>
+              <%= render 'posts/like_button', post: post %>
+            <% end %>
+        </div>
+      </div>
+      <% if post.content.length > 255 %>
+        <div id="module">
+          <p class="collapse" id="collapseExample" aria-expanded="false">
+            <pre class="text-wrap"><%= post.content %></pre>
+          </p>
+          <a role="button" class="collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></a>
+        </div>
+      <% else %>
+        <p class="card-text">
+          <pre><%= post.content %></pre>
+        </p>
+      <% end %>
+      <% if post.images.attached? %>
+        <% if post.images.count == 1 %>
+          <div class="text-center">
+            <%= image_tag(post.images.first) %>
+          </div>
+        <% else %>
+          <div id="carouselExampleControls" class="carousel slide" data-interval="false" data-ride="carousel">
+            <div class="carousel-inner text-center">
+              <div class="carousel-item active">
+                <%= image_tag(post.images.first) %>
+              </div>
+              <% for i in 1..post.images.count - 1 do %>
+                <div class="carousel-item">
+                  <%= image_tag(post.images[i]) %>
+                </div>
+              <% end %>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        <% end %>
+      <% end %>
+      <% if post.recipe_id != nil%>
+        <p class="h-4">Recipe for <%= Recipe.find(post.recipe_id).name %></p>
+        <p class="card-text">
+            <pre class="text-wrap"><%= Recipe.find(post.recipe_id).text %></pre>
+        </p>
+        <p class="text-center h-4">ingredients</p>
+        <% Recipe.find(post.recipe_id).ingredients.reverse.each do |ingredient| %>
+          <div class="text-left">
+              <div class="d-flex justify-content-left card-body bg-light rounded mb-1 mt-1">
+                <p>
+                    <%= ingredient.name  %>
+                </p>
+              </div>
+          </div>
+        <% end %>
+        <button type="button" class="btn btn-dark w-100">
+          <%= link_to "Add", { :controller => :recipes, :action => :add_shared_recipe, shared_recipe_id: post.recipe_id  }, { class: "link_button" }%>
+        </button>
+      <% end %>
+      <div class="card my-1">
+        <div class="card-body">
+          <p class="font-weight-bold">Comments</p>
+          <%= form_with(model: [post, post.comments.build]) do |f| %>
+            <%= f.label 'New comment' %>
+            <%= f.text_area :body, class: 'form-control' %>
+            <%= f.submit 'Submit', class: 'btn btn-dark mb-1 mt-1' %>
+          <% end %>
+          <%= render post.comments, post: post %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

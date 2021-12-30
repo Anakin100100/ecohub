@@ -1,0 +1,46 @@
+<div class="row text-left mb-2 mt-2 w">
+    <div class="col-4">
+        <button type="button" class="btn btn-dark w-100">
+            <%= link_to 'Recipes', recipes_path, :class => "link_button" %>
+        </button>
+    </div>
+    <div class="col-4">
+        <button type="button" class="btn btn-dark w-100">
+            <%= link_to 'Wiew', recipe_path(@recipe), :class => "link_button" %>
+        </button>
+    </div>
+    <div class="col-4">
+        <button type="button" class="btn btn-dark w-100">
+            <%= link_to 'Delete', @recipe, method: :delete, data: { confirm: 'Are you sure?' }, :class => "link_button" %>
+        </button>
+    </div>
+</div>
+
+
+<h2>Edit recipe</h2>
+<%= render 'form' %>
+
+
+<h2>Edit ingredients</h2>
+<%= render 'ingredient_form', recipe: @recipe, ingredient: @ingredient %>
+<% @recipe.ingredients.reverse.each do |ingredient| %>
+    <div class="text-left">
+        <div class="d-flex justify-content-center card-body bg-light rounded mb-1 mt-1">
+            <div class="col-6">
+                <h5>
+                    <%= ingredient.name  %>
+                </h5>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-primary">
+                    <%= link_to 'Edit', edit_ingredient_path(ingredient: ingredient, origin: "recipe", id: @recipe.id), :class => "link_button" %>
+                </button>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-primary">
+                    <%= link_to 'Delete', ingredient_path(origin: "recipe", id: @recipe.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "link_button" %>
+                </button>
+            </div>
+        </div>
+    </div>
+<% end %>

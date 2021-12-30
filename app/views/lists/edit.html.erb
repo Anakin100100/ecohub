@@ -1,0 +1,143 @@
+<%= form_with(model: @list) do |form| %>
+    <% if @list.errors.any? %>
+        <div id="error_explanation">
+        <h2><%= pluralize(@list.errors.count, "error") %> prohibited this list from being saved:</h2>
+            <ul>
+                <% @list.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <div>
+        <div class="col-12 text-center">
+            <h2>Name: <%= @list.name %></h2>
+        </div>
+        <h2>Add recipes</h2>
+        <div>
+            <form class="search mt-2 md-2" id="search" action="/" accept-charset="UTF-8" method="get">
+                <input name="utf8" type="hidden" value="&#x2713;" />
+                <div class="row">
+                    <div class="col-8">
+                        <div class="form-group">
+                            <input type="text" class="form-control" aria-describedby="search for recipe" placeholder="Recipe name" name="search" id="search_text_field" />
+                        </div>
+                    </div>
+                    <div class="col-4 text-center ">
+                        <button type="submit" class="btn btn-dark w-100">Search</button>
+                    </div>
+                </div>
+            </form>
+            <% if params[:search] %>
+                <% if params[:search].count != 0 %>
+                    <h4 class="md-1 mt-1">Search results for "<%= params[:search_phrase] %>"</h4>
+                    <% params[:search].each do |param| %>
+                        <div class="card md-1 mt-1">
+                            <div class="card-body">
+                                <div class="text-left">
+                                    <div class="d-flex justify-content-around">
+                                        <div class="col-8">
+                                            <div class="text-center">
+                                                <p class="text-center">
+                                                    <%= param["name"]  %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-dark w-100">
+                                                <%= link_to "Add",  controller: "recipes", action: "add_recipe_to_list", recipe_id: param["id"].to_i, list_id: @list.id, :class => "link_button" %> 
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                <% else %>
+                    <h4>None</h4>
+                <% end %>
+            <% end %>      
+        </div>
+        <h3>Recipes</h3>
+        <% @recipes.each do |recipe| %>
+            <div class="card md-1 mt-1">
+                <div class="card-body">
+                    <div class="row text-left">
+                        <div class="text-center">
+                            <h5 class="text-center">
+                                <%= recipe.name  %>
+                            </h5>
+                        </div>
+                        <div class="d-flex justify-content-around">
+                            <button type="button" class="btn btn-primary">
+                                <%= link_to 'Show', recipe_path(recipe), :class => "link_button" %>
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                <%= link_to 'Edit', edit_recipe_path(recipe), :class => "link_button" %>
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                <%= link_to 'Delete', recipe, method: :delete, data: { confirm: 'Are you sure?' }, :class => "link_button" %>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+        <h2 class="mt-2">Add ingredients</h2>
+            <%= form_with model: @ingredient do |form| %>
+                <% if @ingredient.errors.any? %>
+                    <div id="error_explanation">
+                    <h2><%= pluralize(@ingredient.errors.count, "error") %> prohibited this ingredient from being saved:</h2>
+                        <ul>
+                            <% @ingredient.errors.full_messages.each do |message| %>
+                                <li><%= message %></li>
+                            <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+                <div class="row">
+                    <div class="col-12">
+                        <p>Name: </p>
+                        <%= form.text_area :name, rows: 1, style: 'width:100%;', class: "rounded"%>
+                    </div>
+                    <div class="col-12">
+                        <p>Weight (in g): </p>
+                        <%= form.number_field :weight, style: 'width:100%;', class: "rounded"%>
+                    </div>
+                    <div class="col-12">
+                        <p>Price (in usd): </p>
+                        <%= form.number_field :price, style: 'width:100%;', class: "rounded"%>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12 mb-2 mt-2">
+                        <%= hidden_field(:list, :id, :value => @list.id) %>
+                        <%= form.submit class: 'btn btn-primary', style: 'width:100%; margin-bottom: 2vh;' %>
+                    </div>
+                </div>
+            <% end %>
+        <h3 class="text-center">Ingredients</h3>
+        <% @list.ingredients.each do |ingredient| %>
+            <div class="text-left">
+                <div class="d-flex justify-content-center card-body bg-light rounded mb-1 mt-1 text-center">
+                    <div class="col-6">
+                        <h5>
+                            <%= ingredient.name  %>
+                        </h5>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-primary">
+                            <%= link_to 'Edit', edit_ingredient_path(ingredient: ingredient, origin: "list", id: @list.id), :class => "link_button" %>
+                        </button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-primary">
+                            <%= link_to 'Delete', ingredient_path(ingredient: ingredient, origin: "list", id: @list.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "link_button" %>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+        <%= hidden_field(:list, :id, :value => @list.id) %>
+    </div>
+<% end %>

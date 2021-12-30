@@ -1,0 +1,17 @@
+<h2 class="text-center">Home</h2>
+<p class="h4">Create new</p>
+<div class="row">
+    <div class="col-sm-12 text-right">
+      <%= render 'form', post: @post %>
+    </div>
+</div>
+  
+  <div data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll">
+    <div data-target="infinite-scroll.entries">
+      <%= render "posts" %>
+    </div>
+  
+    <div data-target="infinite-scroll.pagination" class="invisible">
+      <%== pagy_nav @pagy%>
+    </div>
+  </div>

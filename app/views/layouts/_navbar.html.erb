@@ -1,0 +1,44 @@
+<% if user_signed_in? %>
+    <div class="fixed-top text-center">
+        <div class="w-100 d-flex justify-content-around sticky-menu">
+            <button type="button" class="btn" aria-label="home buttom">
+                <%= link_to posts_path do %>
+                    <i class="fas fa-lg fa-home black-icon"></i>
+                <% end %>
+            </button>
+            <button type="button" class="btn" aria-label="cooking recipes button">
+                <%= link_to recipes_path do %>
+                    <i class="fas fa-lg fa-utensils black-icon"></i>
+                <% end %>
+            </button>
+            <button type="button" class="btn" aria-label="shopping lists button">
+                <%= link_to lists_path do %>
+                    <i class=" fa-lg fas fa-list-ol black-icon"></i>
+                <% end %>
+            </button>
+            <button type="button" class="btn" aria-label="wasted food menu button">
+                <%= link_to controller: "ingredients", action: "wasted_ingredients" do %>
+                    <i class="fas fa-lg fa-trash  black-icon"></i>
+                <% end %>
+            </button>
+            <button type="button" class="btn" aria-label="profile button">
+                <%= link_to  controller: "users", action: "profile" do%> 
+                    <i class="fas fa-lg fa-user black-icon"></i>
+                <% end %>
+            </button>
+        </div>
+    </div>
+    <div class="mb-5"></div>
+<% else %>
+    <h2 class="mt-2 md-2">
+        <%= link_to "ECOHUB", root_path, class: "nav-link h2 text-black text-center link_button" %>
+    </h2>
+    <div class="mt-2 mb-2 d-flex justify-content-around container">
+            <button type="button" aria-label="login button" class="btn btn-light text-center text-black">
+                <%= link_to "Login", new_user_session_path, class: "nav-link active text-center" %>
+            </button> 
+            <button type="button" aria-label="sign up button" class="btn btn-light text-center text-black">
+                <%= link_to "Sign up", new_user_registration_path, class: "nav-link active text-center" %>
+            </button>
+    </div>
+<% end %>

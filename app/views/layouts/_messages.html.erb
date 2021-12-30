@@ -1,0 +1,12 @@
+<div class="container">
+  <% flash.each do |name, msg| %>
+    <%if name != "notice"%>
+      <div class="alert alert-<%= "danger" %> alert-dismissible fade show" role="alert">
+        <%= msg %>
+        <button type="button" class="btn close-alert-button align-right" data-dismiss="alert" aria-label="Close">
+          <i class="far fa-window-close"></i>
+        </button>
+      </div>
+    <% end %>
+  <% end %> 
+</div>

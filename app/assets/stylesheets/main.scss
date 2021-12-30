@@ -1,0 +1,132 @@
+@import "palette";
+
+body {
+    background-color: $inchworm;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+#sticky-footer {
+    background-color: $corn;
+}
+
+.close-alert-button {
+    background-color: $corn;
+}
+
+.alert {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.high-button {
+    margin-top: 4%;
+    margin-bottom: 2%;
+    background-color: $tea-green;
+}
+
+@media only screen and (max-width: 990px) {
+
+    #page-content {
+        margin-left: 4%;
+        margin-right: 4%;
+    }
+    
+}
+@media only screen and (min-width: 990px) {
+    #page-content {
+        margin-left: 8%;
+        margin-right: 8%;
+    }
+
+    .logout-button {
+        margin-left: 18vw;
+    }
+
+}
+
+.file-uploader {
+    margin-bottom: 3vh;
+}
+
+#landing {
+    position: sticky;
+    top: 0px;
+    background-color: $tea-green;
+    z-index: 100;
+}
+  
+#module a.collapsed:after {
+content: '+ Show More';
+}
+  
+#module a:not(.collapsed):after {
+content: '- Show Less';
+}
+
+#module #collapseExample.collapse:not(.show) {
+display: block;
+/* height = lineheight * no of lines to display */
+height: 4.5em;
+overflow: hidden;
+}
+
+#module #collapseExample.collapsing {
+height: 4.5em;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+   
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+
+.logged-in-nav {
+    background-color: $tea-green;
+}
+
+.sticky-menu {
+    background-color: $tea-green;
+}
+
+.black-icon {
+    color: black;
+}
+
+.not-logged-on-div-navbar {
+    width: 80%;
+}
+
+.btn-primary {
+    background-color: black;
+    color: white;
+    text-decoration:none;
+}
+
+.btn-primary:hover {
+    color: white;
+}
+
+.btn-dark {
+    background-color: black;
+    color: white;
+    text-decoration:none;
+}
+
+.link_button {
+    color: white;
+    text-decoration:none;
+}
+
+.a {
+    color: white;
+    text-decoration:none;
+}
+
+.red {
+    color: red;
+}

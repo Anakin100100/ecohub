@@ -1,0 +1,28 @@
+<%= form_with(model: @list) do |form| %>
+    <% if @list.errors.any? %>
+        <div id="error_explanation">
+        <   h2><%= pluralize(@list.errors.count, "error") %> prohibited this list from being saved:</h2>
+            <ul>
+                <% @list.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <div class="row">
+        <div class="col-12">
+            <h3>Name: </h3>
+            <%= form.text_area :name, rows: 1, style: 'width:100%;', class: "rounded"%>
+        </div>
+        <h3>Recipes</h3>
+        <p>add recipes after creating a list</p>
+        <h3>Ingredients</h3>
+        <p>add ingredients after creating a list</p>
+
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-12 mb-2 mt-2">
+            <%= form.submit class: 'btn btn-primary', style: 'width:100%; margin-bottom: 2vh;' %>
+        </div>
+    </div>
+<% end %>
