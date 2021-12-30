@@ -1,4 +1,4 @@
-# REEADME
+# README
 This is a project for a [Mini hackathon 1st edition](https://nowaakademia.org/mini-hackathon-edycja-i/). It tackles the challenging problem of food waste by allowing users to:
  - share recipes with premade shopping lists
  - create custom private recipes with shopping lists
