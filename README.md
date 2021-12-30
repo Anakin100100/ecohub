@@ -4,22 +4,22 @@ This is a project for a [Mini hackathon 1st edition](https://nowaakademia.org/mi
  - create custom private recipes with shopping lists
  - create shopping lists
  - track and reduce food waste
-# Programming languages and other technologies:
+# Programming languages
 - Ruby
 - Html
 - Css
 - javascript
-Styles:
+# Styles:
 - Scss
 - Bootstrap
-Javascript framework:
+# Javascript framework:
 - Stimulusjs
-Web framework:
+# Web framework:
 - Ruby on rails
-Contenerization:
+# Contenerization:
 - Docker
 - Docker-compose
-Cloud technologies:
+# Cloud technologies:
 - Aws Elastic Container Service
 - Aws Fargate
 - Aws Elastic Load Balancer
