@@ -4,7 +4,6 @@ This is a project for a [Mini hackathon 1st edition](https://nowaakademia.org/mi
  - create custom private recipes with shopping lists
  - create shopping lists
  - track and reduce food waste
- - 
 # Programming languages and other technologies:
 - Ruby
 - Html
